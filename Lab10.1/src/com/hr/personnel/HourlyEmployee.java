@@ -8,6 +8,8 @@
 
 package com.hr.personnel;
 
+import gov.irs.IllegalWageException;
+
 import java.time.LocalDate;
 
 public class HourlyEmployee extends Employee {
@@ -25,7 +27,7 @@ public class HourlyEmployee extends Employee {
     }
 
     public HourlyEmployee (String name, LocalDate hireDate, double rate, double hours)
-            throws IllegalArgumentException {  //throws an exception b/c of using setRate() method
+            throws IllegalWageException {  //throws an exception b/c of using setRate() method
         this(name, hireDate);   // delegate to neighboring ctor for name, hireDate
         setRate(rate);          // handle rate here, by delegating to setter  //setRate() throws exception if a bad rate is entered
         setHours(hours);        // handle hours here, by delegating to setter
@@ -50,9 +52,9 @@ public class HourlyEmployee extends Employee {
 
     //We throw an exception if the wage is below the Fed. min., announce we're doing it in the method
     //signature, and provide a message when we throw it.  We should also announce this where ever we use the method.
-    public void setRate(double rate) throws IllegalArgumentException {
+    public void setRate(double rate) throws IllegalWageException {
         if (rate < FEDERAL_MINIMUM_WAGE) { //invalid -> throw exception
-            throw new IllegalArgumentException("Illegal wage " + rate + ". Federal minimum wage is " + FEDERAL_MINIMUM_WAGE);
+            throw new IllegalWageException("Illegal wage " + rate + ". Federal minimum wage is " + FEDERAL_MINIMUM_WAGE);
         } else {                            //valid -> assign to field
             this.rate = rate;
         }
