@@ -27,16 +27,24 @@ class HRClient {
         System.out.println(dept);
 
         // add Employees to it   //b/c we're using a checked exception in HourlyEmployee, we have to add a try-catch block
-        //or in other words, we "have a plan in place"
+        //or in other words, we "have a plan in place".  Here, we move SalariedEmployees out of the try block so they will
+        //be created.  We also put Logan in his own try-catch block so his Employee object will be created.
+        dept.addEmployee(new SalariedEmployee("Jason", LocalDate.of(1990, 8, 24), 2250.0));
+        dept.addEmployee(new SalariedEmployee("Amilia", LocalDate.of(1999, 2, 6), 1250.0));
         try {
-            dept.addEmployee(new SalariedEmployee("Jason", LocalDate.of(1990, 8, 24), 2250.0));
             dept.addEmployee(new HourlyEmployee("Julie", LocalDate.of(2000, 2, 2), 35.0, 30.0));
-            dept.addEmployee(new SalariedEmployee("Amilia", LocalDate.of(1999, 2, 6), 1250.0));
+        }
+        catch(IllegalWageException e){
+            System.out.println(e);
+        }
+        try{
             dept.addEmployee(new HourlyEmployee("Logan", LocalDate.of(2002, 6, 2), 30.0, 40.0));
         }
         catch(IllegalWageException e){
-            System.out.println(" Error: " + e);
+            System.out.println(e);
         }
+
+
         // list its Employees
         System.out.println("\nList employees:");
         dept.listEmployees();
