@@ -38,10 +38,10 @@ public class HourlyEmployee extends Employee {
     //payTaxes() method is needed b/c SalariedEmployee implements the TaxPayer interface
     @Override  //interface TaxPayer
     public void payTaxes(){
-        System.out.println(getName() + " paid taxes of " + getRate()*getHours()*HOURLY_TAX_RATE);
+        System.out.println(getName() + " paid hourly taxes of " + getRate()*getHours()*HOURLY_TAX_RATE);
     }
 
-    //getters/setters
+    //accessor methods - getters/setters
     public double getRate() {
         return rate;
     }

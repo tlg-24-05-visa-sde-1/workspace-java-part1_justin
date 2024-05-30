@@ -17,9 +17,10 @@ package gov.irs;
  *   If the IRS were to change tax rates, we would only need to change that here.
  */
 public interface TaxPayer {
-    //we can include class constants here, public static finals.
+    //we can include class constants here, public static finals, explicitly saying public static final or not (it's implicit).
     public static final double HOURLY_TAX_RATE = 0.25;
     public static final double SALARIED_TAX_RATE = 0.30;
+    public static final double STANDARD_DEDUCTION = 7500.0;
 
     //tells us TaxPayers payTaxes() but don't tell us HOW they do it. payTaxes is implicitly abstract.
     public void payTaxes();
@@ -33,5 +34,9 @@ public interface TaxPayer {
     //this won't break the existing classes that implement the Interface
     default public void fileReturn(){
         System.out.println("Return filed by US Mail");
+    }
+
+    default public double getStandardDeduction(){
+        return STANDARD_DEDUCTION;
     }
 }

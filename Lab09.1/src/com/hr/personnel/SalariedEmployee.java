@@ -8,8 +8,10 @@ import java.time.LocalDate;
 //IS-A Employee
 public class SalariedEmployee extends Employee {
 
+
     //properties
     double salary;
+    public static final double STANDARD_DEDUCTION = 10_000.0;
 
     //constructors
 
@@ -45,6 +47,10 @@ public class SalariedEmployee extends Employee {
     @Override //interface TaxPayer
     public void payTaxes(){
         System.out.println(getName() + " paid taxes of " + (getSalary()*SALARIED_TAX_RATE));
+    }
+    @Override //interface TaxPayer
+    public double getStandardDeduction(){
+        return STANDARD_DEDUCTION;
     }
 
 
