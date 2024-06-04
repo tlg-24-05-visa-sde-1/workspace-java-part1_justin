@@ -25,7 +25,7 @@ class InMemoryCatalogTest {
      */
     public static void main(String[] args) {
         // testFindById();
-         testFindByKeyword();
+        //testFindByKeyword();
         // testFindByCategory();
         // testSize();
         // testGetAll();
@@ -33,18 +33,24 @@ class InMemoryCatalogTest {
         //testCheapRock();
         // testSelfTitled();
         //testGenreCount();
+        //testAvgPrice();
     }
 
-    private static void testGenreCount(){
+
+    private static void testAvgPrice(){
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        System.out.println(catalog.avgPrice());
+    }
+    private static void testGenreCount() {
         InMemoryCatalog catalog = new InMemoryCatalog();
         System.out.println(catalog.genreCount(MusicCategory.POP));
     }
 
-    private static void testSelfTitled(){
+    private static void testSelfTitled() {
         InMemoryCatalog catalog = new InMemoryCatalog();
         Collection<MusicItem> selfTitled = catalog.findSelfTitled();
         dump(selfTitled);
-    };
+    }
 
     private static void testFindById() {
         InMemoryCatalog catalog = new InMemoryCatalog();
@@ -59,7 +65,7 @@ class InMemoryCatalogTest {
 
     private static void testFindByKeyword() {
         InMemoryCatalog catalog = new InMemoryCatalog();
-        dump(catalog.findByKeyword("A"));
+        dump(catalog.findByKeyword("Y"));
     }
 
     private static void testFindByCategory() {
@@ -74,19 +80,23 @@ class InMemoryCatalogTest {
     }
 
     private static void testSize() {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        System.out.println(catalog.size());
     }
 
     private static void testGetAll() {
+        InMemoryCatalog catalog = new InMemoryCatalog();
+        dump(catalog.getAll());
     }
 
-    private static void dump(Collection<MusicItem> items){
-        for(MusicItem item : items){
-            System.out.println(item);
-        }
-    }
-
-    private static void testCheapRock(){
+    private static void testCheapRock() {
         InMemoryCatalog catalog = new InMemoryCatalog();
         dump(catalog.cheapRock(12.00));
+    }
+
+    private static void dump(Collection<MusicItem> items) {
+        for (MusicItem item : items) {
+            System.out.println(item);
+        }
     }
 }

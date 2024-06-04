@@ -10,6 +10,7 @@ package com.javatunes.catalog;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 // OF COURSE THIS CLASS DOESN'T COMPILE
@@ -47,7 +48,7 @@ public class InMemoryCatalog implements Catalog {
     public MusicItem findById(Long id) {
         MusicItem item = null;
         for (MusicItem currItem : catalogData){  //iterate over ArrayList
-            if (currItem.getId().equals(id)){  //if the id of the MusicItem is equal to the id passed
+            if (currItem.getId().equals(id)){  //Don't use == to compare objects(Long objects here)! If equal, set to currItem.
                 item = currItem;                // set item to the current item.
             }
         }
@@ -65,7 +66,8 @@ public class InMemoryCatalog implements Catalog {
 
      */
     @Override
-    //TODO- fix- right now it searched for letters if you pass in a single letter, not words I think.
+    //TODO- fix- is there a way to only search for whole words?  Right now, if you search for "a" it will return any
+    //TODO- item that has a letter "a" in any field.
     public Collection<MusicItem> findByKeyword(String keyword) {
         Collection<MusicItem> result = new ArrayList<>();
         //for each loop
@@ -85,7 +87,7 @@ public class InMemoryCatalog implements Catalog {
     public Collection<MusicItem> findByCategory(MusicCategory category) {
         Collection<MusicItem> result = new ArrayList<>();
         for (MusicItem item : catalogData){
-            if(item.getMusicCategory().equals(category)){
+            if(item.getMusicCategory() == category){  //We can use == to compare here b/c the object are ENUMS
                 result.add(item);
             }
         }
@@ -108,7 +110,8 @@ public class InMemoryCatalog implements Catalog {
      */
     @Override
     public Collection<MusicItem> getAll() {
-        return List.of();
+        Collection<MusicItem> readOnlyCatalog = Collections.unmodifiableList(catalogData);
+        return  readOnlyCatalog;
     }
 
 
@@ -183,12 +186,21 @@ public class InMemoryCatalog implements Catalog {
      * TASK: determine average price of our low-cost, extensive catalog of music.
      */
     public double avgPrice(){   //we don't need an input from client
-        return 0.0;
+        double totalPrice= 0;
+        for(MusicItem item : catalogData){
+            totalPrice += item.getPrice();
+        }
+        return totalPrice/catalogData.size();
     }
 
     /**
      * TASK: find the cheapest item with the specified genre (MusicCategory).
      */
+    //TODO-find how to compare all items price
+    public Collection<MusicItem> cheapestInGenre(MusicCategory category){
+        Collection<MusicItem> cheapest = new ArrayList<>();
+        return cheapest;
+    }
 
 
     /**
